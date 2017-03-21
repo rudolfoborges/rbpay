@@ -1,6 +1,8 @@
 package rudolfoborges.rbpay.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +16,8 @@ import java.util.List;
  * @since 3/21/17 1:07 PM
  */
 @RestController
-@RequestMapping("v1/products")
+@RequestMapping(value = "v1/products",
+        produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class ProductController {
 
     private final ProductRepository productRepository;
@@ -30,7 +33,7 @@ public class ProductController {
     }
 
     @RequestMapping(path = "{id}", method = {RequestMethod.GET})
-    public ProductEntity getOne(final String id) {
+    public ProductEntity getOne(@PathVariable final String id) {
         return productRepository.findOne(id);
     }
 
