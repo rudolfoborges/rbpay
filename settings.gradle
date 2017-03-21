@@ -1,0 +1,4 @@
+rootProject.name = 'rbpay'
+
+include 'rbpay-product'
+include 'rbpay-discovery-service'
