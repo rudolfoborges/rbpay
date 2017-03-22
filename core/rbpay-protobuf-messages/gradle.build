@@ -1,0 +1,60 @@
+ext {
+    protobufVersion = '3.0.0'
+    protoCommonTypesVersion = '0.0.4'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.0")
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'com.google.protobuf'
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: protobufVersion
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+        }
+        java {
+            srcDirs 'src/main/java', 'generated-sources/main/java'
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    generateProtoTasks.generatedFilesBaseDir = 'generated-sources'
+
+    clean {
+        delete generatedFilesBaseDir
+    }
+
+    generateProtoTasks {
+        ofSourceSet('main')*.plugins {}
+    }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rudolfborges.rbpay.protobuf.product;
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "rudolfoborges.rbpay.protobuf.messages.product";
+option java_outer_classname = "ProductProtos";
+
+message Product {
+
+	string id = 1;
+	string name = 2;
+	string price = 3;
+	string image_url = 4;
+}
