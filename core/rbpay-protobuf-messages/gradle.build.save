@@ -1,0 +1,32 @@
+ext {
+    protobufVersion = '3.0.0'
+    protoCommonTypesVersion = '0.0.4'
+}
+
+buildscript {
+    ext {
+    }
+    repositories {
+        maven {
+            url = nexusUrl
+        }
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.0")
+        classpath("net.researchgate:gradle-release:2.4.0")
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'net.researchgate.release'

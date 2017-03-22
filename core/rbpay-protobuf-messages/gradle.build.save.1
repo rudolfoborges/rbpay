@@ -1,5 +1,8 @@
+group 'foo'
+version '0.1-SNAPSHOT'
+
 ext {
-    protobufVersion = '3.0.0'
+    protobufVersion = '3.2.0'
 }
 
 buildscript {
@@ -10,7 +13,7 @@ buildscript {
 
     dependencies {
         classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.1")
-	classpath("net.researchgate:gradle-release:2.4.0")
+	apply plugin: 'eclipse'
     }
 }
 
@@ -19,11 +22,9 @@ repositories {
     mavenLocal()
 }
 
+
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'com.google.protobuf'
-apply plugin: 'maven'
-apply plugin: 'net.researchgate.release'
 
 compileJava {
     sourceCompatibility = 1.8
@@ -36,6 +37,6 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.0.0'
+        artifact = 'com.google.protobuf:protoc:3.2.0'
     }
 }
