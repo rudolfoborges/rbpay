@@ -3,9 +3,9 @@ syntax = "proto3";
 package rudolfoborges.rbpay.messages;
 
 option java_package = "rudolfoborges.rbpay.messages";
-option java_outer_classname = "ProductProtos";
+option java_outer_classname = "ProductProtocolBuffer";
 
-message Product {
+message ProductMessage {
 
 	string id = 1;
 	string name = 2;

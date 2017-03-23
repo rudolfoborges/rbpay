@@ -1,10 +1,13 @@
 package rudolfoborges.rbpay.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import rudolfoborges.rbpay.messages.MediaType;
-import rudolfoborges.rbpay.messages.ProductProtos;
-import rudolfoborges.rbpay.product.converter.ProductModelToProductProtoConverter;
+import rudolfoborges.rbpay.messages.ProductProtocolBuffer.ProductMessage;
+import rudolfoborges.rbpay.product.converter.ProductToProductMessageConverter;
 import rudolfoborges.rbpay.product.model.Product;
 import rudolfoborges.rbpay.product.repository.ProductRepository;
 
@@ -24,21 +27,18 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping
-    public List<ProductProtos.Product> getAll() {
+    public List<ProductMessage> getAll() {
         final List<Product> products = productRepository.findAllForSale();
-
-        final List<ProductProtos.Product> productsProto = products
+        return products
                 .parallelStream()
-                .map(ProductModelToProductProtoConverter::convert)
+                .map(ProductToProductMessageConverter::convert)
                 .collect(Collectors.toList());
-
-        return productsProto;
     }
 
     @GetMapping("{id}")
-    public ProductProtos.Product getOne(@PathVariable final String id) {
+    public ProductMessage getOne(@PathVariable final String id) {
         final Product product = productRepository.findOne(id);
-        return ProductModelToProductProtoConverter.convert(product);
+        return ProductToProductMessageConverter.convert(product);
     }
 
 }

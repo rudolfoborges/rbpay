@@ -1,11 +1,11 @@
 package rudolfoborges.rbpay.stock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rudolfoborges.rbpay.messages.MediaType;
-import rudolfoborges.rbpay.messages.StockProtos;
-import rudolfoborges.rbpay.stock.converter.StockAdjusmentProtoToStockAdjusmentModelConverter;
+import rudolfoborges.rbpay.messages.StockProtocolBuffer.AvailableAmountMessage;
+import rudolfoborges.rbpay.messages.StockProtocolBuffer.StockAdjustmentMessage;
+import rudolfoborges.rbpay.stock.converter.StockAdjusmentMessageToStockAdjusmentConverter;
 import rudolfoborges.rbpay.stock.model.StockAdjustment;
 import rudolfoborges.rbpay.stock.service.StockControlService;
 
@@ -27,20 +27,20 @@ public class StockController {
     private StockControlService stockControlService;
 
     @GetMapping("/available/{product}")
-    public StockProtos.AvailableAmount getAvailableAmount(@PathVariable final String product){
+    public AvailableAmountMessage getAvailableAmount(@PathVariable final String product) {
         final BigDecimal amount = stockControlService.getAvailableAmount(product);
 
-        return StockProtos.AvailableAmount
+        return AvailableAmountMessage
                 .newBuilder()
                 .setAmount(amount.doubleValue())
                 .build();
     }
 
     @PutMapping("/adjustment")
-    public void adjustment(@RequestBody final List<StockProtos.StockAdjustment> stockAdjustmentsProtos){
+    public void adjustment(@RequestBody final List<StockAdjustmentMessage> stockAdjustmentsProtos) {
         final List<StockAdjustment> stockAdjustments = stockAdjustmentsProtos
                 .parallelStream()
-                .map(StockAdjusmentProtoToStockAdjusmentModelConverter::convert)
+                .map(StockAdjusmentMessageToStockAdjusmentConverter::convert)
                 .collect(Collectors.toList());
 
         stockControlService.adjust(stockAdjustments);

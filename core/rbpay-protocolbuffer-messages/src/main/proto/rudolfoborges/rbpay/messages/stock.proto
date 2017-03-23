@@ -3,16 +3,16 @@ syntax = "proto3";
 package rudolfoborges.rbpay.messages;
 
 option java_package = "rudolfoborges.rbpay.messages";
-option java_outer_classname = "StockProtos";
+option java_outer_classname = "StockProtocolBuffer";
 
-message StockAdjustment{
+message StockAdjustmentMessage {
 
     string product = 1;
     double amount = 2;
 
 }
 
-message AvailableAmount{
+message AvailableAmountMessage {
 
     double amount = 1;
 
