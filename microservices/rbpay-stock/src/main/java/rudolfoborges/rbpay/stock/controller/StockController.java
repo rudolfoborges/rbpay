@@ -1,12 +1,17 @@
 package rudolfoborges.rbpay.stock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rudolfoborges.rbpay.messages.MediaType;
+import rudolfoborges.rbpay.messages.StockProtos;
+import rudolfoborges.rbpay.stock.converter.StockAdjusmentProtoToStockAdjusmentModelConverter;
 import rudolfoborges.rbpay.stock.model.StockAdjustment;
 import rudolfoborges.rbpay.stock.service.StockControlService;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author rudolfoborges
@@ -14,20 +19,31 @@ import java.math.BigDecimal;
  */
 @RestController
 @RequestMapping(value = "v1/stock",
-        consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
-        produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+        consumes = {MediaType.PROTOBUF},
+        produces = {MediaType.PROTOBUF})
 public class StockController {
 
     @Autowired
     private StockControlService stockControlService;
 
-    @GetMapping("/amount/{product}")
-    public void getAmount(@PathVariable final String product){
-        final BigDecimal amount = stockControlService.getAmount(product);
+    @GetMapping("/available/{product}")
+    public StockProtos.AvailableAmount getAvailableAmount(@PathVariable final String product){
+        final BigDecimal amount = stockControlService.getAvailableAmount(product);
+
+        return StockProtos.AvailableAmount
+                .newBuilder()
+                .setAmount(amount.doubleValue())
+                .build();
     }
 
-    public void adjustment(){
+    @PutMapping("/adjustment")
+    public void adjustment(@RequestBody final List<StockProtos.StockAdjustment> stockAdjustmentsProtos){
+        final List<StockAdjustment> stockAdjustments = stockAdjustmentsProtos
+                .parallelStream()
+                .map(StockAdjusmentProtoToStockAdjusmentModelConverter::convert)
+                .collect(Collectors.toList());
 
+        stockControlService.adjust(stockAdjustments);
     }
 
 }

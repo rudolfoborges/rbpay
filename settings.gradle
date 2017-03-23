@@ -3,7 +3,9 @@ rootProject.name = 'rbpay'
 include 'rbpay-product'
 include 'rbpay-stock'
 include 'rbpay-eureka'
+include 'rbpay-protobuf-messages'
 
 project(":rbpay-product").projectDir = file("microservices/rbpay-product")
 project(":rbpay-stock").projectDir = file("microservices/rbpay-stock")
 project(":rbpay-eureka").projectDir = file("rbpay-eureka")
+project(":rbpay-protobuf-messages").projectDir = file("core/rbpay-protobuf-messages")

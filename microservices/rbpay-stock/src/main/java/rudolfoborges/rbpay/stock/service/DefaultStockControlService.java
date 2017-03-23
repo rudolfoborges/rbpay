@@ -21,20 +21,18 @@ public class DefaultStockControlService implements StockControlService {
     @Autowired
     private StockRepository stockRepository;
 
-    public BigDecimal getAmount(final String product) {
+    public BigDecimal getAvailableAmount(final String product) {
         return stockRepository.findAmount(product);
     }
 
-
     @Transactional
-    public void adjustment(List<StockAdjustment> stockAdjustments) {
+    public void adjust(List<StockAdjustment> stockAdjustments) {
         stockAdjustments.parallelStream().forEach(stockAdjustment -> {
-            this.adjustment(stockAdjustment);
+            this.apply(stockAdjustment);
         });
     }
 
-    @Transactional
-    public void adjustment(final StockAdjustment stockAdjustment) {
+    private void apply(final StockAdjustment stockAdjustment) {
         final  String product = stockAdjustment.getProduct();
         final Stock stock = stockRepository.findByProduct(product);
 
@@ -48,7 +46,6 @@ public class DefaultStockControlService implements StockControlService {
         stock.setUpdatedAt(new Date());
 
         stockRepository.save(stock);
-
     }
 
     private BigDecimal calculateNewAmount(final BigDecimal stockAmount, final BigDecimal saleAmount){
