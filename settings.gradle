@@ -2,14 +2,14 @@ rootProject.name = 'rbpay'
 
 include 'rbpay-product'
 include 'rbpay-stock'
-include 'rbpay-checkout'
+include 'rbpay-checkout-moip'
 include 'rbpay-eureka'
 include 'rbpay-protobuf-messages'
 include 'rbpay-webapp'
 
 project(":rbpay-product").projectDir = file("microservices/rbpay-product")
 project(":rbpay-stock").projectDir = file("microservices/rbpay-stock")
-project(":rbpay-checkout").projectDir = file("microservices/rbpay-checkout")
+project(":rbpay-checkout-moip").projectDir = file("microservices/rbpay-checkout-moip")
 project(":rbpay-eureka").projectDir = file("infra/rbpay-eureka")
 project(":rbpay-protobuf-messages").projectDir = file("core/rbpay-protobuf-messages")
 project(":rbpay-webapp").projectDir = file("rbpay-webapp")

@@ -6,9 +6,9 @@ import rudolfoborges.rbpay.product.model.Product;
 /**
  * Created by rudolfoborges on 22/03/17.
  */
-public class ProductModelToProductProtoConverter {
+public interface ProductModelToProductProtoConverter {
 
-    public static ProductProtos.Product convert(Product product) {
+    default ProductProtos.Product convert(Product product) {
         return ProductProtos.Product
                 .newBuilder()
                 .setId(product.getId())

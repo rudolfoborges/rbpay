@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 /**
  * Created by rudolfoborges on 23/03/17.
  */
-public class StockAdjusmentProtoToStockAdjusmentModelConverter {
+public interface StockAdjusmentProtoToStockAdjusmentModelConverter {
 
-    public static StockAdjustment convert(final StockProtos.StockAdjustment proto){
+    default StockAdjustment convert(final StockProtos.StockAdjustment proto) {
         return StockAdjustment
                 .builder()
                 .amount(new BigDecimal(proto.getAmount()))
