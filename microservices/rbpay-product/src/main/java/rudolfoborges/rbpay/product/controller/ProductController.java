@@ -2,11 +2,8 @@ package rudolfoborges.rbpay.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import rudolfoborges.rbpay.product.entity.ProductEntity;
+import org.springframework.web.bind.annotation.*;
+import rudolfoborges.rbpay.product.model.Product;
 import rudolfoborges.rbpay.product.repository.ProductRepository;
 
 import java.util.List;
@@ -20,20 +17,16 @@ import java.util.List;
         produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class ProductController {
 
-    private final ProductRepository productRepository;
-
     @Autowired
-    public ProductController(final ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
-    @RequestMapping(method = {RequestMethod.GET})
-    public List<ProductEntity> getAll() {
+    @GetMapping
+    public List<Product> getAll() {
         return productRepository.findAllForSale();
     }
 
-    @RequestMapping(path = "{id}", method = {RequestMethod.GET})
-    public ProductEntity getOne(@PathVariable final String id) {
+    @GetMapping("{id}")
+    public Product getOne(@PathVariable final String id) {
         return productRepository.findOne(id);
     }
 
