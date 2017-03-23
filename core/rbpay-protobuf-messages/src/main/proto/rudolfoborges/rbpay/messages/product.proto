@@ -1,10 +1,8 @@
 syntax = "proto3";
 
-package rudolfborges.rbpay.protobuf.product;
+package rudolfoborges.rbpay.protobuf.product;
 
-import "google/protobuf/timestamp.proto";
-
-option java_package = "rudolfoborges.rbpay.messages.product";
+option java_package = "rudolfoborges.rbpay.messages";
 option java_outer_classname = "ProductProtos";
 
 message Product {
