@@ -2,7 +2,7 @@ package rudolfoborges.rbpay.product.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import rudolfoborges.rbpay.product.entity.ProductEntity;
+import rudolfoborges.rbpay.product.model.Product;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
  * @author rudolfoborges
  * @since 3/21/17 1:05 PM
  */
-public interface ProductRepository extends JpaRepository<ProductEntity, String> {
+public interface ProductRepository extends JpaRepository<Product, String> {
 
-    @Query("select product from ProductEntity product where active = true order by name")
-    List<ProductEntity> findAllForSale();
+    @Query("select stock from ProductEntity stock where active = true order by name")
+    List<Product> findAllForSale();
 
 }

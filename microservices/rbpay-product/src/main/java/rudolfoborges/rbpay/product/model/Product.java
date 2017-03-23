@@ -1,4 +1,4 @@
-package rudolfoborges.rbpay.product.entity;
+package rudolfoborges.rbpay.product.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +23,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductEntity {
+public class Product {
 
     @Id
     @Size(max = 50)
