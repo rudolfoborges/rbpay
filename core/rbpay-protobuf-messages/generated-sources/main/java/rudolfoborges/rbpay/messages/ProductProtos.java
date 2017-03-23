@@ -15,7 +15,7 @@ public final class ProductProtos {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface ProductOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:rudolfoborges.rbpay.protobuf.product.Product)
+      // @@protoc_insertion_point(interface_extends:rudolfoborges.rbpay.messages.Product)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -39,14 +39,9 @@ public final class ProductProtos {
         getNameBytes();
 
     /**
-     * <code>optional string price = 3;</code>
+     * <code>optional double price = 3;</code>
      */
-    java.lang.String getPrice();
-    /**
-     * <code>optional string price = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getPriceBytes();
+    double getPrice();
 
     /**
      * <code>optional string image_url = 4;</code>
@@ -59,11 +54,11 @@ public final class ProductProtos {
         getImageUrlBytes();
   }
   /**
-   * Protobuf type {@code rudolfoborges.rbpay.protobuf.product.Product}
+   * Protobuf type {@code rudolfoborges.rbpay.messages.Product}
    */
   public  static final class Product extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:rudolfoborges.rbpay.protobuf.product.Product)
+      // @@protoc_insertion_point(message_implements:rudolfoborges.rbpay.messages.Product)
       ProductOrBuilder {
     // Use Product.newBuilder() to construct.
     private Product(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
@@ -72,7 +67,7 @@ public final class ProductProtos {
     private Product() {
       id_ = "";
       name_ = "";
-      price_ = "";
+      price_ = 0D;
       imageUrl_ = "";
     }
 
@@ -113,10 +108,9 @@ public final class ProductProtos {
               name_ = s;
               break;
             }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 25: {
 
-              price_ = s;
+              price_ = input.readDouble();
               break;
             }
             case 34: {
@@ -138,12 +132,12 @@ public final class ProductProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor;
+      return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_messages_Product_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_protobuf_product_Product_fieldAccessorTable
+      return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_messages_Product_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               rudolfoborges.rbpay.messages.ProductProtos.Product.class, rudolfoborges.rbpay.messages.ProductProtos.Product.Builder.class);
     }
@@ -217,37 +211,12 @@ public final class ProductProtos {
     }
 
     public static final int PRICE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object price_;
+    private double price_;
     /**
-     * <code>optional string price = 3;</code>
+     * <code>optional double price = 3;</code>
      */
-    public java.lang.String getPrice() {
-      java.lang.Object ref = price_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        price_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string price = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPriceBytes() {
-      java.lang.Object ref = price_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        price_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public double getPrice() {
+      return price_;
     }
 
     public static final int IMAGE_URL_FIELD_NUMBER = 4;
@@ -302,8 +271,8 @@ public final class ProductProtos {
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
-      if (!getPriceBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, price_);
+      if (price_ != 0D) {
+        output.writeDouble(3, price_);
       }
       if (!getImageUrlBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, imageUrl_);
@@ -321,8 +290,9 @@ public final class ProductProtos {
       if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
-      if (!getPriceBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, price_);
+      if (price_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, price_);
       }
       if (!getImageUrlBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, imageUrl_);
@@ -347,8 +317,10 @@ public final class ProductProtos {
           .equals(other.getId());
       result = result && getName()
           .equals(other.getName());
-      result = result && getPrice()
-          .equals(other.getPrice());
+      result = result && (
+          java.lang.Double.doubleToLongBits(getPrice())
+          == java.lang.Double.doubleToLongBits(
+              other.getPrice()));
       result = result && getImageUrl()
           .equals(other.getImageUrl());
       return result;
@@ -366,7 +338,8 @@ public final class ProductProtos {
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + PRICE_FIELD_NUMBER;
-      hash = (53 * hash) + getPrice().hashCode();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getPrice()));
       hash = (37 * hash) + IMAGE_URL_FIELD_NUMBER;
       hash = (53 * hash) + getImageUrl().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -452,20 +425,20 @@ public final class ProductProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code rudolfoborges.rbpay.protobuf.product.Product}
+     * Protobuf type {@code rudolfoborges.rbpay.messages.Product}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:rudolfoborges.rbpay.protobuf.product.Product)
+        // @@protoc_insertion_point(builder_implements:rudolfoborges.rbpay.messages.Product)
         rudolfoborges.rbpay.messages.ProductProtos.ProductOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor;
+        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_messages_Product_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_protobuf_product_Product_fieldAccessorTable
+        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_messages_Product_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 rudolfoborges.rbpay.messages.ProductProtos.Product.class, rudolfoborges.rbpay.messages.ProductProtos.Product.Builder.class);
       }
@@ -491,7 +464,7 @@ public final class ProductProtos {
 
         name_ = "";
 
-        price_ = "";
+        price_ = 0D;
 
         imageUrl_ = "";
 
@@ -500,7 +473,7 @@ public final class ProductProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor;
+        return rudolfoborges.rbpay.messages.ProductProtos.internal_static_rudolfoborges_rbpay_messages_Product_descriptor;
       }
 
       public rudolfoborges.rbpay.messages.ProductProtos.Product getDefaultInstanceForType() {
@@ -570,9 +543,8 @@ public final class ProductProtos {
           name_ = other.name_;
           onChanged();
         }
-        if (!other.getPrice().isEmpty()) {
-          price_ = other.price_;
-          onChanged();
+        if (other.getPrice() != 0D) {
+          setPrice(other.getPrice());
         }
         if (!other.getImageUrl().isEmpty()) {
           imageUrl_ = other.imageUrl_;
@@ -742,71 +714,28 @@ public final class ProductProtos {
         return this;
       }
 
-      private java.lang.Object price_ = "";
+      private double price_ ;
       /**
-       * <code>optional string price = 3;</code>
+       * <code>optional double price = 3;</code>
        */
-      public java.lang.String getPrice() {
-        java.lang.Object ref = price_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          price_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public double getPrice() {
+        return price_;
       }
       /**
-       * <code>optional string price = 3;</code>
+       * <code>optional double price = 3;</code>
        */
-      public com.google.protobuf.ByteString
-          getPriceBytes() {
-        java.lang.Object ref = price_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          price_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string price = 3;</code>
-       */
-      public Builder setPrice(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setPrice(double value) {
+        
         price_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string price = 3;</code>
+       * <code>optional double price = 3;</code>
        */
       public Builder clearPrice() {
         
-        price_ = getDefaultInstance().getPrice();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string price = 3;</code>
-       */
-      public Builder setPriceBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        price_ = value;
+        price_ = 0D;
         onChanged();
         return this;
       }
@@ -890,10 +819,10 @@ public final class ProductProtos {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:rudolfoborges.rbpay.protobuf.product.Product)
+      // @@protoc_insertion_point(builder_scope:rudolfoborges.rbpay.messages.Product)
     }
 
-    // @@protoc_insertion_point(class_scope:rudolfoborges.rbpay.protobuf.product.Product)
+    // @@protoc_insertion_point(class_scope:rudolfoborges.rbpay.messages.Product)
     private static final rudolfoborges.rbpay.messages.ProductProtos.Product DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new rudolfoborges.rbpay.messages.ProductProtos.Product();
@@ -929,10 +858,10 @@ public final class ProductProtos {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor;
+    internal_static_rudolfoborges_rbpay_messages_Product_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_rudolfoborges_rbpay_protobuf_product_Product_fieldAccessorTable;
+      internal_static_rudolfoborges_rbpay_messages_Product_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -943,11 +872,10 @@ public final class ProductProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n*rudolfoborges/rbpay/messages/product.p" +
-      "roto\022$rudolfoborges.rbpay.protobuf.produ" +
-      "ct\"E\n\007Product\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022" +
-      "\r\n\005price\030\003 \001(\t\022\021\n\timage_url\030\004 \001(\tB-\n\034rud" +
-      "olfoborges.rbpay.messagesB\rProductProtos" +
-      "b\006proto3"
+      "roto\022\034rudolfoborges.rbpay.messages\"E\n\007Pr" +
+      "oduct\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005price" +
+      "\030\003 \001(\001\022\021\n\timage_url\030\004 \001(\tB-\n\034rudolfoborg" +
+      "es.rbpay.messagesB\rProductProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -961,11 +889,11 @@ public final class ProductProtos {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor =
+    internal_static_rudolfoborges_rbpay_messages_Product_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_rudolfoborges_rbpay_protobuf_product_Product_fieldAccessorTable = new
+    internal_static_rudolfoborges_rbpay_messages_Product_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_rudolfoborges_rbpay_protobuf_product_Product_descriptor,
+        internal_static_rudolfoborges_rbpay_messages_Product_descriptor,
         new java.lang.String[] { "Id", "Name", "Price", "ImageUrl", });
   }
 

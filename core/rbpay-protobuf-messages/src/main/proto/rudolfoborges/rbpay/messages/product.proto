@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rudolfoborges.rbpay.protobuf.product;
+package rudolfoborges.rbpay.messages;
 
 option java_package = "rudolfoborges.rbpay.messages";
 option java_outer_classname = "ProductProtos";
@@ -9,6 +9,6 @@ message Product {
 
 	string id = 1;
 	string name = 2;
-	string price = 3;
+	double price = 3;
 	string image_url = 4;
 }

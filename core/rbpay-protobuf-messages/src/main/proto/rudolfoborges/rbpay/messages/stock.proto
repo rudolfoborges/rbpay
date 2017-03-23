@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package rudolfoborges.rbpay.messages;
+
+option java_package = "rudolfoborges.rbpay.messages";
+option java_outer_classname = "StockProtos";
+
+message StockAdjustment{
+
+    string product = 1;
+    double amount = 2;
+
+}
+
+message AvailableAmount{
+
+    double amount = 1;
+
+}

@@ -47,7 +47,7 @@ protobuf {
     protoc {
         artifact = 'com.google.protobuf:protoc:3.0.0'
     }
-    generateProtoTasks.generatedFilesBaseDir = 'generated-sources'
+    generateProtoTasks.generatedFilesBaseDir = "generated-sources"
 
     clean {
         delete generatedFilesBaseDir

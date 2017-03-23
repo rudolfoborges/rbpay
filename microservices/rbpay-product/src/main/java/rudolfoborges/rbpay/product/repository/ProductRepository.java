@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-    @Query("select stock from ProductEntity stock where active = true order by name")
+    @Query("select stock from Product stock where active = true order by name")
     List<Product> findAllForSale();
 
 }

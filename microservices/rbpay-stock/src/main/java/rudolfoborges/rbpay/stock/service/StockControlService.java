@@ -11,10 +11,8 @@ import java.util.List;
  */
 public interface StockControlService {
 
-    BigDecimal getAmount(final String product);
+    BigDecimal getAvailableAmount(final String product);
 
-    void adjustment(final List<StockAdjustment> stockAdjustments);
-
-    void adjustment(final StockAdjustment stockAdjustment);
+    void adjust(final List<StockAdjustment> stockAdjustments);
 
 }
